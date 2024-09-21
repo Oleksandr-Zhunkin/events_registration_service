@@ -8,3 +8,7 @@ export const getAllEvents = () => {
 export const registerOnEventById = (data) => {
   return User.create(data);
 };
+
+export const getVisitorsByEventId = (filter) => {
+  return User.find(filter);
+};

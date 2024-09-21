@@ -11,4 +11,6 @@ eventsRouter.get("/", eventsControllers.getAllEvents);
 
 eventsRouter.post("/:eventId", validateUser, eventsControllers.registerOnEvent);
 
+eventsRouter.get("/:eventId", eventsControllers.getEventVisitors);
+
 export default eventsRouter;
