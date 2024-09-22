@@ -5,9 +5,14 @@ const getAllEvents = async (req, res) => {
   const { page, limit } = req.query;
   const skip = (page - 1) * limit;
 
-  const result = await eventsServices.getAllEvents({ skip, limit });
+  const { events, eventsQuantity } = await eventsServices.getAllEvents({
+    skip,
+    limit,
+  });
 
-  res.json(result);
+  const totalPages = Math.ceil(eventsQuantity / limit);
+
+  res.json({ events, totalPages });
 };
 
 const registerOnEvent = async (req, res) => {
