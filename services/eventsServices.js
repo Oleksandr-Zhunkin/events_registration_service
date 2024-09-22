@@ -1,8 +1,8 @@
 import Event from "../models/Event.js";
 import User from "../models/User.js";
 
-export const getAllEvents = () => {
-  return Event.find();
+export const getAllEvents = (settings) => {
+  return Event.find(null, null, settings);
 };
 
 export const registerOnEventById = (data) => {

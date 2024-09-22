@@ -2,7 +2,10 @@ import ctrlWrapper from "../decorators/ctrlWrapper.js";
 import * as eventsServices from "../services/eventsServices.js";
 
 const getAllEvents = async (req, res) => {
-  const result = await eventsServices.getAllEvents();
+  const { page, limit } = req.query;
+  const skip = (page - 1) * limit;
+
+  const result = await eventsServices.getAllEvents({ skip, limit });
 
   res.json(result);
 };
