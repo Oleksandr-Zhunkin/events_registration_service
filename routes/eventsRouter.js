@@ -9,7 +9,11 @@ const eventsRouter = express.Router();
 
 eventsRouter.get("/", eventsControllers.getAllEvents);
 
-eventsRouter.post("/:eventId", validateUser, eventsControllers.registerOnEvent);
+eventsRouter.post(
+  "/register/:eventId",
+  validateUser,
+  eventsControllers.registerOnEvent
+);
 
 eventsRouter.get("/:eventId", eventsControllers.getEventVisitors);
 
