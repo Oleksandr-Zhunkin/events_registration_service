@@ -4,6 +4,11 @@ import User from "../models/User.js";
 export const getAllEvents = async (filter, settings) => {
   const uniqueEventDates = await Event.aggregate([
     {
+      $match: {
+        eventDate: { $type: "date" },
+      },
+    },
+    {
       $group: {
         _id: {
           $dateToString: { format: "%Y-%m-%d", date: "$eventDate" },
@@ -22,6 +27,8 @@ export const getAllEvents = async (filter, settings) => {
   const eventsQuantity = await Event.countDocuments();
   const uniqueTitles = await Event.distinct("title");
   const uniqueOrganizers = await Event.distinct("organizer");
+  console.log(uniqueTitles, uniqueOrganizers, uniqueEventDates);
+
   return {
     events,
     eventsQuantity,
