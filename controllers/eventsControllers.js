@@ -11,7 +11,16 @@ const getAllEvents = async (req, res) => {
     filter.title = title;
   }
   if (eventDate) {
-    filter.eventDate = eventDate;
+    const startDate = new Date(eventDate);
+    const endDate = new Date(eventDate);
+
+    startDate.setHours(0, 0, 0, 0);
+    endDate.setHours(23, 59, 59, 999);
+
+    filter.eventDate = {
+      $gte: startDate,
+      $lt: endDate,
+    };
   }
   if (organizer) {
     filter.organizer = organizer;
