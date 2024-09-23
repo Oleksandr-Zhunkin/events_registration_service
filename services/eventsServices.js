@@ -27,7 +27,6 @@ export const getAllEvents = async (filter, settings) => {
   const eventsQuantity = await Event.countDocuments();
   const uniqueTitles = await Event.distinct("title");
   const uniqueOrganizers = await Event.distinct("organizer");
-  console.log(uniqueTitles, uniqueOrganizers, uniqueEventDates);
 
   return {
     events,

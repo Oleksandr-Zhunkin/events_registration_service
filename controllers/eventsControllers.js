@@ -17,14 +17,26 @@ const getAllEvents = async (req, res) => {
     filter.organizer = organizer;
   }
 
-  const { events, eventsQuantity } = await eventsServices.getAllEvents(filter, {
+  const {
+    events,
+    eventsQuantity,
+    uniqueTitles,
+    uniqueOrganizers,
+    uniqueEventDates,
+  } = await eventsServices.getAllEvents(filter, {
     skip,
     limit,
   });
 
   const totalPages = Math.ceil(eventsQuantity / limit);
 
-  res.json({ events, totalPages });
+  res.json({
+    events,
+    totalPages,
+    uniqueTitles,
+    uniqueOrganizers,
+    uniqueEventDates,
+  });
 };
 
 const registerOnEvent = async (req, res) => {
