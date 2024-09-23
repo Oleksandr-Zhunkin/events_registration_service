@@ -6,14 +6,17 @@ export const getAllEvents = async (filter, settings) => {
     {
       $addFields: {
         eventDate: {
-          $dateFromString: { dateString: "$eventDate", format: "%m.%d.%Y" },
+          $dateFromString: {
+            dateString: "$eventDate.date",
+            format: "%m.%d.%Y",
+          },
         },
       },
     },
     {
       $group: {
         _id: {
-          $dateToString: { format: "%Y-%m-%d", date: "$eventDate" },
+          $dateToString: { format: "%Y-%m-%d", date: "$eventDate.date" },
         },
       },
     },
